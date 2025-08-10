@@ -17,7 +17,7 @@ fi
 
 
 
-sudo pacman -S sway nemo nautilus waybar wofi kitty vscode git base-devel &&
+sudo pacman -S sway nemo nautilus waybar wofi kitty vscode git base-devel nodejs npm &&
 
 
 if [ ! cd yay-bin ]; then
@@ -30,5 +30,12 @@ yay eww &&
 sudo pacman -S ly &&
 sudo systemctl disable gdm &&
 sudo systemctl enable ly &&
+sudo mv -r sway  $HOME/.config/ &&
+sudo mv -r kitty  $HOME/.config/ &&
+mkdir $HOME/.local;
+mkdir $HOME/share/fonts;
+mv "VCR_OSD_MONO_1.001.ttf" "$HOME/.local/share/fonts" &&
+sudo fc-cache &&
+chmod +x ./sounds/ql.sh &&
+echo 'nohup "$HOME/.sysconfig/sounds/ql.sh" </dev/null >/dev/null 2>&1 &' >> .bashrc &&
 echo "reboot yor computer for the changes to take effect";
-sudo mv -r sway  $HOME/.config/

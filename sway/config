@@ -4,6 +4,36 @@
 #
 # Read `man 5 sway` for a complete reference.
 
+### Colors
+set $rosewater #f2d5cf
+set $flamingo #eebebe
+set $pink #f4b8e4
+set $mauve #ca9ee6
+set $red #e78284
+set $maroon #ea999c
+set $peach #ef9f76
+set $yellow #e5c890
+set $green #a6d189
+set $teal #81c8be
+set $sky #99d1db
+set $sapphire #85c1dc
+set $blue #8caaee
+set $lavender #babbf1
+set $text #c6d0f5
+set $subtext1 #b5bfe2
+set $subtext0 #a5adce
+set $overlay2 #949cbb
+set $overlay1 #838ba7
+set $overlay0 #737994
+set $surface2 #626880
+set $surface1 #51576d
+set $surface0 #414559
+set $base #303446
+set $mantle #292c3c
+set $crust #232634
+
+
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -20,10 +50,54 @@ set $menu wofi --show drun
 
 set $file_explorer nautilus
 
+set $ide code .
+
+gaps inner 8px
+gaps outer 8px
+default_border pixel 4px
+default_floating_border pixel 4px
+
+corner_radius 10
+
+
+
+
+
+for_window [app_id="kitty"] border pixel 8px; client.focused #1263BC #1263BC #1263BC #1263BC #1263BC
+
+# target                 title     bg    text   indicator  border
+client.focused           $lavender $base $text  $rosewater #1263BC
+client.focused_inactive  $overlay0 $base $text  $rosewater #000000
+client.unfocused         $overlay0 $base $text  $rosewater #000000
+client.urgent            $peach    $base $peach $overlay0  #6FD1FF
+client.placeholder       $overlay0 $base $text  $overlay0  #6FD1FF
+
+# bar
+bar {
+  swaybar_command waybar
+}
+#   position top
+#   status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+#   colors {
+#     background         #3B060A
+#     statusline         $text
+#     focused_statusline #FFF287
+#     focused_separator  #FFF287
+
+#     # target           border   bg        text
+#     focused_workspace  #C83F12  #FFF287   #3B060A
+#     active_workspace   #C83F12  #FFF287   #3B060A
+#     inactive_workspace #3B060A  #3B060A   #FFF287
+#     urgent_workspace   #8A0000  #C83F12   #FFF287
+#   }
+# }
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+
+output '*' bg "$HOME/.config/sway/wallpapers/bg.jpg" fill
+
 #
 # Example configuration:
 #
@@ -58,6 +132,7 @@ input * xkb_layout "it"
 #
 # Basics:
 #
+
     # Start a terminal
     bindsym $mod+Return exec $term
 
@@ -65,8 +140,10 @@ input * xkb_layout "it"
     # Kill focused window
     bindsym $mod+q kill
 
+
     # Start your launcher
     bindsym $mod+p exec $menu
+    bindsym $mod+d exec $ide
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -210,18 +287,5 @@ bindsym $mod+r mode "resize"
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
-bar {
-    position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
-}
 
 include /etc/sway/config.d/*
